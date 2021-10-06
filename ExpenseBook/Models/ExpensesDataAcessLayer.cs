@@ -124,10 +124,16 @@ namespace ExpenseManager.Models
                .Select(cat => cat.Amount)
                .Sum();
 
+            decimal homeSum = db.ExpenseReport.Where
+               (cat => cat.Category == "Home" && (cat.ExpenseDate > DateTime.Now.AddMonths(-7)))
+               .Select(cat => cat.Amount)
+               .Sum();
+
             dictMonthlySum.Add("Food", foodSum);
             dictMonthlySum.Add("Shopping", shoppingSum);
             dictMonthlySum.Add("Travel", travelSum);
             dictMonthlySum.Add("Health", healthSum);
+            dictMonthlySum.Add("Home", homeSum);
 
             return dictMonthlySum;
         }
@@ -141,7 +147,7 @@ namespace ExpenseManager.Models
             Dictionary<string, decimal> dictWeeklySum = new Dictionary<string, decimal>();
 
             decimal foodSum = db.ExpenseReport.Where
-                (cat => cat.Category == "Food" && (cat.ExpenseDate > DateTime.Now.AddDays(-7)))
+                (cat => cat.Category == "Food" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
                 .Select(cat => cat.Amount)
                 .Sum();
 
@@ -160,10 +166,16 @@ namespace ExpenseManager.Models
                .Select(cat => cat.Amount)
                .Sum();
 
+            decimal homeSum = db.ExpenseReport.Where
+              (cat => cat.Category == "Home" && (cat.ExpenseDate > DateTime.Now.AddDays(-28)))
+              .Select(cat => cat.Amount)
+              .Sum();
+
             dictWeeklySum.Add("Food", foodSum);
             dictWeeklySum.Add("Shopping", shoppingSum);
             dictWeeklySum.Add("Travel", travelSum);
             dictWeeklySum.Add("Health", healthSum);
+            dictWeeklySum.Add("Home", homeSum);
 
             return dictWeeklySum;
         }
