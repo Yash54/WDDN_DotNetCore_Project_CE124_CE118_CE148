@@ -11,47 +11,47 @@
 
 <h2>Personal Expense Manager</h2>
 <br />
-<div>
-    <div style="float:left">
+<div class="row">
+    <div class="col-md-6">
         <button class="btn btn-primary" onclick="AddEditExpenses(0)">Add Expense</button>
         <button class="btn btn-success" onclick="ReportExpense()">Expense Report</button>
     </div>
-    <div style="float:right; width:40%;">
+    <div class="col-md-6">
+
         <form asp-controller="Expense" asp-action="Index" class="form-group">
-            <div class="col-sm-6">
-                <input class="form-control" type="text" name="SearchString" placeholder="Search">
-            </div>
+            <input class="form-control" type="text" name="SearchString" placeholder="Search"><br/>
             <button type="submit" class="btn btn-default btn-info">Filter</button>
         </form>
+        
     </div>
 </div>
 <br />
 <br />
-<table class="table">
-    <thead>
+<table class="table table-striped">
+    <thead class="thead-dark">
         <tr>
             <th>@Html.DisplayNameFor(model => model.ItemId)</th>
             <th>@Html.DisplayNameFor(model => model.ItemName)</th>
             <th>@Html.DisplayNameFor(model => model.Amount)</th>
             <th>@Html.DisplayNameFor(model => model.ExpenseDate)</th>
             <th>@Html.DisplayNameFor(model => model.Category)</th>
-            <th>Action Item</th>
+            <th >Action Item</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.ItemId)</td>
-                <td>@Html.DisplayFor(modelItem => item.ItemName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Amount)</td>
-                <td>@Html.DisplayFor(modelItem => item.ExpenseDate)</td>
-                <td>@Html.DisplayFor(modelItem => item.Category)</td>
-                <td>
-                    <button class="btn btn-default" onclick="AddEditExpenses(@item.ItemId)">Edit</button>
-                    <button class="btn btn-danger" onclick="DeleteExpense(@item.ItemId)">Delete</button>
-                </td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.ItemId)</td>
+            <td>@Html.DisplayFor(modelItem => item.ItemName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+            <td>@Html.DisplayFor(modelItem => item.ExpenseDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.Category)</td>
+            <td>
+                <button class="btn btn-outline-success" onclick="AddEditExpenses(@item.ItemId)">Edit</button>
+                <button class="btn btn-danger" onclick="DeleteExpense(@item.ItemId)">Delete</button>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
